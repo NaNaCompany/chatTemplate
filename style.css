@@ -10,6 +10,7 @@
     --bubble-ai-bg: #2a2d36;
     --input-bg: rgba(22, 25, 32, 0.8);
     --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --header-bg: rgba(22, 25, 32, 0.85);
 }
 
 body.light-theme {
@@ -22,6 +23,7 @@ body.light-theme {
     --bubble-ai-bg: #f0f2f5;
     --input-bg: #ffffff;
     --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --header-bg: rgba(255, 255, 255, 0.85);
 }
 
 * {
@@ -59,7 +61,7 @@ body {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--border-color);
-    background: rgba(22, 25, 32, 0.85);
+    background: var(--header-bg);
     backdrop-filter: blur(10px);
     z-index: 10;
 }
@@ -101,10 +103,30 @@ body {
 
 .timestamp {
     font-size: 0.75rem;
-    color: var(--text-secondary);
+    color: white;
     background: rgba(42, 45, 54, 0.5);
     padding: 4px 12px;
     border-radius: 12px;
+    user-select: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.timestamp:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.timestamp-input {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 0.75rem;
+    font-family: inherit;
+    text-align: center;
+    width: 100px;
+    outline: none;
+    padding: 0;
+    margin: 0;
 }
 
 /* Message Bubbles */
@@ -236,4 +258,117 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #3e4451;
+}
+
+/* Onboarding Overlay */
+#onboarding-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    z-index: 1000;
+    pointer-events: auto;
+}
+
+#onboarding-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.hint-arrow {
+    position: absolute;
+    color: var(--text-primary);
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 1001;
+    pointer-events: none;
+}
+
+/* Animations - Simplified to avoid transform conflicts */
+@keyframes bounce-up {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes bounce-down {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(180deg);
+    }
+
+    50% {
+        transform: translateY(10px) rotate(180deg);
+    }
+}
+
+.hint-arrow .arrow {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+/* Specific Positions */
+.hint-title {
+    top: 90px;
+    left: 40px;
+}
+
+.hint-title .arrow {
+    border-bottom: 15px solid var(--text-primary);
+    /* Points UP by default (border-bottom) */
+    animation: bounce-up 2s infinite;
+}
+
+.hint-model {
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.hint-model .arrow {
+    border-bottom: 15px solid var(--text-primary);
+    /* Points UP by default */
+    margin-bottom: 5px;
+    animation: bounce-up 2s infinite;
+}
+
+.hint-input {
+    bottom: 100px;
+    right: 40px;
+    align-items: flex-end;
+    flex-direction: column-reverse;
+    /* Put arrow at bottom */
+}
+
+.hint-input .arrow {
+    border-bottom: 15px solid var(--text-primary);
+    transform: rotate(180deg);
+    /* Points DOWN */
+    animation: bounce-down 2s infinite;
+}
+
+.overlay-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    pointer-events: none;
+    opacity: 0.5;
 }
