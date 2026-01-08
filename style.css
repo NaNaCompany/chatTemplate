@@ -12,6 +12,18 @@
     --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+body.light-theme {
+    --bg-color: #f0f2f5;
+    --chat-bg: #ffffff;
+    --secondary-gradient: linear-gradient(135deg, #f0f2f5, #e4e6eb);
+    --text-primary: #1c1e21;
+    --text-secondary: #65676b;
+    --border-color: #e4e6eb;
+    --bubble-ai-bg: #f0f2f5;
+    --input-bg: #ffffff;
+    --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -56,6 +68,8 @@ body {
     font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: -0.5px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .header-content .subtitle {
@@ -171,7 +185,7 @@ body {
     flex: 1;
     background: transparent;
     border: none;
-    color: white;
+    color: var(--text-primary);
     padding: 12px 16px;
     font-size: 1rem;
     outline: none;

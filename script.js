@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageInput = document.getElementById('messageInput');
     const chatMessages = document.getElementById('chatMessages');
     const chatViewport = document.getElementById('chatViewport');
+    const titleElement = document.querySelector('.header-content h1');
+
+    // Toggle Theme
+    titleElement.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+    });
 
     // State tracking
     let messageCount = 1;
